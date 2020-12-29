@@ -1,20 +1,44 @@
 import React, { Component } from 'react';
 
 class TodoListItem extends Component {
+    state = {
+        btflag: false,
+        context: ''
+    };
     
+    ButtonUpdate = () => {
+        this.setState({
+            btflag: !this.state.btflag
+        });
+    };
+
+    // handleUpdate = (id) => {
+    //     const {onUpdate} = this.props;
+    //     const {context} = this.state;
+    //     onUpdate(id, context);
+    //     this.setState({
+    //         context: '',
+    //         btflag: !this.state.btflag
+    //     });
+    // };
+
+    // handleChange = (e) => {
+    //     this.setState({
+    //         context: e.target.value
+    //     });
+    // };
 
     render() {
-        const {context, onClick, btflag, ButtonUpdate} = this.props;
+        const {context} = this.props;
+        const {btflag} = this.state;
+        const {ButtonUpdate, handleUpdate, handleChange} = this;
         const btnText = btflag ? '확인' : '수정';
-        //const ctxTag = this.state.btflag ? <input /> : {btnText};
-        //console.log(id, context);
         return (
-            // <li key={context.id} onClick={() => onClick(context.id, context.context)}>
-            //     {context.context} <button onClick={this.ButtonUpdate}>{ctxTag}</button> </li>
             <div>
-                <li key={context.id} onClick={() => onClick(context.id, context.context)}>
-                    {btflag ? <input /> : context.context}
-                    <button onClick={() => ButtonUpdate(context.id)}>{btnText}</button>
+                <li key={context.id}>
+                    {btflag ? <input onChange={handleChange} value={this.state.context} /> : context.context}
+                    {btflag ? <button onClick={() => handleUpdate(context.id)}>{btnText}</button>
+                     : <button onClick={() => ButtonUpdate()}>{btnText}</button>}
                 </li>
             </div>
             

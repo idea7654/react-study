@@ -3,7 +3,7 @@ import TodoListItem from './TodoListItem';
 
 class TodoList extends Component {
     render() {
-        const {todoList, onUpdate, btflag, ButtonUpdate} = this.props;
+        const {todoList, onUpdate} = this.props;
         //console.log(todoList); //array
         //반복문, for문, foreach ...
         //불변성을 지키기 위해 사용x
@@ -19,7 +19,7 @@ class TodoList extends Component {
                 <ul>
                     {todoList.map((data) => {
                         //return <li onClick={() => onUpdate(data.id, data.context)} key={data.id}>{data.context} <button>수정</button></li>
-                        return <TodoListItem btflag={btflag} ButtonUpdate={ButtonUpdate} onClick={onUpdate} context={data} />
+                        return <TodoListItem onUpdate={onUpdate} context={data} />
                     })}
                     
                     {/* 0번째방 data.context

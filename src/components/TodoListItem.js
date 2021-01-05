@@ -12,26 +12,30 @@ class TodoListItem extends Component {
         });
     };
 
-    // handleUpdate = (id) => {
-    //     const {onUpdate} = this.props;
-    //     const {context} = this.state;
-    //     onUpdate(id, context);
-    //     this.setState({
-    //         context: '',
-    //         btflag: !this.state.btflag
-    //     });
-    // };
+    handleUpdate = (id) => {
+        const {onUpdate} = this.props;
+        const {context} = this.state;
+        onUpdate(id, context);
+        this.setState({
+            context: '',
+            btflag: !this.state.btflag
+        });
+    };
 
-    // handleChange = (e) => {
-    //     this.setState({
-    //         context: e.target.value
-    //     });
-    // };
+    handleChange = (e) => {
+        this.setState({
+            context: e.target.value
+        });
+    };
+
+    handleDestroy = (id) => {
+        this.props.onDestroy(id);
+    };
 
     render() {
         const {context} = this.props;
         const {btflag} = this.state;
-        const {ButtonUpdate, handleUpdate, handleChange} = this;
+        const {ButtonUpdate, handleUpdate, handleChange, handleDestroy} = this;
         const btnText = btflag ? '확인' : '수정';
         return (
             <div>
@@ -39,6 +43,7 @@ class TodoListItem extends Component {
                     {btflag ? <input onChange={handleChange} value={this.state.context} /> : context.context}
                     {btflag ? <button onClick={() => handleUpdate(context.id)}>{btnText}</button>
                      : <button onClick={() => ButtonUpdate()}>{btnText}</button>}
+                    <button onClick={() => handleDestroy(context.id)}>삭제</button>
                 </li>
             </div>
             
@@ -47,5 +52,3 @@ class TodoListItem extends Component {
 }
 
 export default TodoListItem;
-
-
